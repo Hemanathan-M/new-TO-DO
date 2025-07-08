@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #4a4a4a;
+    background-image: url('/placeholder.svg?height=1080&width=1920');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px 16px 16px;
+    position: relative;
+}
+
+/* Add overlay for better text readability */
+/* Add overlay for better text readability */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(74, 74, 74, 0.3);  /* ← CHANGED 0.8 to 0.3 */
+    z-index: -1;
+}
+
+.background-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+}
+
+.bg-button {
+    padding: 8px 12px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #374151;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bg-button:hover {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.title {
+    color: white;
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 32px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.input-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    z-index: 1;
+}
+
+.task-input {
+    width: 320px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: black;
+    backdrop-filter: blur(10px);
+}
+
+.task-input::placeholder {
+    color: #6b7280;
+}
+
+.add-button {
+    padding: 12px 24px;
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-button:hover {
+    background-color: #16a34a;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.tasks-container {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1;
+}
+
+.task-item {
+    background-color: rgba(139, 92, 246, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: slideIn 0.3s ease-out;
+    min-height: 60px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.task-content {
+    flex: 1;
+    margin-right: 12px;
+}
+
+.task-text {
+    color: white;
+    font-size: 16px;
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-family: inherit;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.task-text:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 4px 8px;
+    text-shadow: none;
+    color: white;
+}
+
+.task-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.task-button {
+    background-color: rgba(229, 231, 235, 0.95);
+    color: #374151;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button:hover {
+    background-color: rgba(252, 165, 165, 0.95);
+    color: #dc2626;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.edit-button:hover {
+    background-color: rgba(191, 219, 254, 0.95);
+    color: #2563eb;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.edit-button.editing {
+    background-color: rgba(34, 197, 94, 0.95);
+    color: white;
+}
+
+.edit-button.editing:hover {
+    background-color: rgba(22, 163, 74, 0.95);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 640px) {
+    .task-input {
+        width: 250px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+
+    .task-buttons {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .task-button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    body {
+        background-attachment: scroll;
+    }
+
+    .background-controls {
+        top: 10px;
+        right: 10px;
+        flex-direction: column;
+    }
+
+    .bg-button {
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+}
+
+/* Alternative background options - uncomment to use */
+
+/* Option 1: Gradient background */
+/*
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+body::before {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+*/
+
+/* Option 2: Pattern background */
+/*
+body {
+    background-color: #4a4a4a;
+    background-image: 
+        radial-gradient(circle at 25px 25px, rgba(255,255,255,0.1) 2px, transparent 0),
+        radial-gradient(circle at 75px 75px, rgba(255,255,255,0.1) 2px, transparent 0);
+    background-size: 100px 100px;
+}
+*/
+
+/* Option 3: Animated gradient background */
+/*
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+*/
+/* Add these styles at the end of your styles.css file */
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+    accent-color: #22c55e;
+    transform: scale(1.2);
+}
+
+.task-item.completed {
+    opacity: 0.7;
+    background-color: rgba(139, 92, 246, 0.6);
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+.task-content {
+    flex: 1;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.task-text-wrapper {
+    flex: 1;
+}

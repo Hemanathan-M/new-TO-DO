@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background upload option -->
+    <div class="background-controls">
+        <input type="file" id="backgroundUpload" accept="image/*" style="display: none;">
+        <button class="bg-button" onclick="document.getElementById('backgroundUpload').click()">
+            📷 Change Background
+        </button>
+        <button class="bg-button" onclick="taskManager.resetBackground()">
+            🔄 Reset
+        </button>
+    </div>
+
+    <h1 class="title">Save Your Daily Task Here...</h1>
+    
+    <div class="input-container">
+        <input 
+            type="text" 
+            class="task-input" 
+            id="taskInput" 
+            placeholder="Type your task here.."
+        >
+        <button class="add-button" id="addButton">Add</button>
+    </div>
+    
+    <div class="tasks-container" id="tasksContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
